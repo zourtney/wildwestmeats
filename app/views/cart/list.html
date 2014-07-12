@@ -1,9 +1,8 @@
 <h1>Cart</h1>
 
 <ul>
-  <li ng-repeat="cartItem in cartItems">
-    {{cartItem.product}}
-    x
-    {{cartItem.quantity}}
+  <li ng-repeat="cartItem in cart">
+    {{cartItem.cartItems.length}}x
+    {{cartItem.product.name}} @ ${{cartItem.product.price}}ea
   </li>
 </ul>

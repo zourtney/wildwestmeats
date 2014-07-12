@@ -1,3 +1,4 @@
+/*global _ */
 'use strict';
 
 /**
@@ -35,42 +36,50 @@ angular.module('fauxcart.products')
 /**
  * Manager service for all available products.
  */
-.factory('inventory', ['$q', '$window', 'localstorage', 'defaultInventory', function($q, $window, localstorage, defaultInventory) {
+.factory('inventory', ['$q', 'localstorage', 'defaultInventory', function($q, localstorage, defaultInventory) {
 
-  var inventory,
-      INVENTORY_KEY = 'inventory';
+  var INVENTORY_KEY = 'inventory',
+      inventory = localstorage.get(INVENTORY_KEY) || defaultInventory,
+      products = [];
+
+
+  function Product(data) {
+    this.id = data.id;
+    this.name = data.name;
+    this.price = data.price;
+  }
+
+  _.each(inventory, function(item) {
+    products.push(new Product(item));
+  });
+
 
   return {
     /**
-     * Returns all products available in the inventory
+     * Returns all products available in the inventory.
+     * Meant to simulate a resource call like "GET /api/inventory/".
      */
-    all: function() {
+    query: function() {
       var deferred = $q.defer();
-      deferred.resolve(inventory);
+      deferred.resolve(products);
       return deferred.promise;
     },
 
     /**
-     * Persists the inventory to `localStorage`.
+     * Returns the product with the given ID.
+     * Meant to simulate a resource call like "GET /api/inventory/1".
      */
-    save: function() {
-      var deferred = $q.defer();
-      
-      localstorage.set(INVENTORY_KEY, inventory);
-      deferred.resolve(inventory);
-      
-      return deferred.promise;
-    },
+    get: function(id) {
+      var deferred = $q.defer(),
+          product = _.findWhere(products, {id: id});
 
-    /**
-     * Load inventory from `localStorage` into in-app memory.
-     */
-    load: function() {
-      var deferred = $q.defer();
+      if (product) {
+        deferred.resolve(product);
+      }
+      else {
+        deferred.reject('Not found');
+      }
 
-      inventory = localstorage.get(INVENTORY_KEY) || defaultInventory;
-      deferred.resolve(inventory);
-      
       return deferred.promise;
     }
   };

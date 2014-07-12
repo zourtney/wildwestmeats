@@ -20,13 +20,4 @@ angular.module('fauxcart.products', [
       controller: 'ProductListCtrl'
     });
 
-}])
-
-.run(['inventory', function(inventory) {
-
-  // Load the item store on startup
-  inventory.load().then(function(products) {
-    console.log('Inventory initialized with ' + products.length + ' products.');
-  });
-
 }]);

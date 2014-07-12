@@ -6,7 +6,8 @@
     for
     ${{product.price}}
 
-    <div>{{cart.items[product.id].quantity}}</div>
+    ({{cart.items[product.id].quantity}})
+    
     <add-to-cart-button product="product" cart="cart"></add-to-cart-button>
   </li>
 </ul>

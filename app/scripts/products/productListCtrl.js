@@ -2,12 +2,14 @@
 
 angular.module('fauxcart.products')
 
-.controller('ProductListCtrl', ['$scope', 'inventory', 'cart', function($scope, inventory, cart) {
+.controller('ProductListCtrl', ['$scope', 'inventory', 'cartItem', function($scope, inventory, CartItem) {
 
-  inventory.all().then(function(products) {
+  inventory.query().then(function(products) {
     $scope.products = products;
   });
 
-  $scope.cart = cart;
+  CartItem.query().then(function(cartItems) {
+    $scope.cartItems = cartItems;
+  });
 
 }]);
