@@ -160,12 +160,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Install bower_components
-    bower: {
-      install: {
-      }
-    },
-
     // Automatically inject Bower components into the app
     wiredep: {
       options: {
@@ -405,7 +399,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'bower:install',
       'wiredep',
       'concurrent:server',
       'autoprefixer',
@@ -421,7 +414,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'bower:install',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -430,7 +422,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'bower:install',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
