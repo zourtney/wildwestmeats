@@ -15,7 +15,9 @@ angular.module('fauxcart', [
   'ngRoute',
   // 'ngSanitize',
   // 'ngTouch',
-  'fauxcart.products'
+  'fauxcart.common',
+  'fauxcart.products',
+  'fauxcart.cart'
 ])
 
 .config(function($routeProvider) {
@@ -29,6 +31,6 @@ angular.module('fauxcart', [
     //   controller: 'AboutCtrl'
     // })
     .otherwise({
-      redirectTo: '/items'
+      redirectTo: '/products'
     });
 });

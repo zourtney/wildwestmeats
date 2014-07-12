@@ -5,5 +5,10 @@
     {{product.name}}
     for
     ${{product.price}}
+
+    <div>{{cart.items[product.id].quantity}}</div>
+    <add-to-cart-button product="product" cart="cart"></add-to-cart-button>
   </li>
 </ul>
+
+<cart-total cart="cart"></cart-total>

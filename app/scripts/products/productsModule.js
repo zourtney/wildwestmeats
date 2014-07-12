@@ -8,13 +8,14 @@
  */
 angular.module('fauxcart.products', [
   'ngRoute',
-  'fauxcart.common'
+  'fauxcart.common',
+  'fauxcart.cart'
 ])
 
 .config(['$routeProvider', function($routeProvider) {
 
   $routeProvider
-    .when('/items', {
+    .when('/products', {
       templateUrl: 'views/products/list.html',
       controller: 'ProductListCtrl'
     });

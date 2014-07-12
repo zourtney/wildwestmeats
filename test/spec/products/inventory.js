@@ -32,15 +32,17 @@ describe('Factory: inventory', function () {
   describe('after calling load()', function() {
     var products;
     beforeEach(function(done) {
-      inv.all().then(function(data) {
-        console.log('with a ' + data);
-        products = data;
-        done();
+      inv.load().then(function() {
+        inv.all().then(function(data) {
+          console.log('with a ' + data);
+          products = data;
+          done();
+        });
       });
     });
 
     it('should have loaded the defaultInventory set', function() {
-    //   expect(products).toEqual(di);
+      expect(products).toEqual(di);
     });
   });
 });
