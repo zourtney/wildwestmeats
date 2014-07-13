@@ -1,4 +1,3 @@
-/*global _ */
 'use strict';
 
 /**
@@ -12,11 +11,9 @@ angular.module('fauxcart.cart')
 .factory('cart', ['$q', 'localstorage', function($q, localstorage) {
 
   var CART_KEY = 'cart',
-      cartItems = localstorage.get(CART_KEY) || {},
-      cartSvc;
+      cartItems = localstorage.get(CART_KEY) || {};
 
-
-  cartSvc = {
+  return {
     /**
      * Get all items in the cart. This will return an object with product IDs
      * for keys and quanity as values.
@@ -42,13 +39,5 @@ angular.module('fauxcart.cart')
       return deferred.promise;
     }
   };
-
-
-  // On startup, load from localstorage.
-  _.each(cartItems, function(val, key) {
-    cartItems[key] = val;
-  });
-
-  return cartSvc;
 
 }]);

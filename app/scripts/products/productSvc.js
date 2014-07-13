@@ -34,25 +34,19 @@ angular.module('fauxcart.products')
 })
 
 /**
- * Manager service for all available products.
+ * Manager service for manipulating available products.
  */
 .factory('inventory', ['$q', 'localstorage', 'defaultInventory', function($q, localstorage, defaultInventory) {
 
   var INVENTORY_KEY = 'inventory',
-      inventory = localstorage.get(INVENTORY_KEY) || defaultInventory,
-      products = [];
+      products = localstorage.get(INVENTORY_KEY) || defaultInventory;
 
-
-  function Product(data) {
-    this.id = data.id;
-    this.name = data.name;
-    this.price = data.price;
+  /**
+   * Helper: get a product by its ID
+   */
+  function getById(id) {
+    return _.findWhere(products, {id: parseInt(id)});
   }
-
-  _.each(inventory, function(item) {
-    products.push(new Product(item));
-  });
-
 
   return {
     /**
@@ -71,7 +65,7 @@ angular.module('fauxcart.products')
      */
     get: function(id) {
       var deferred = $q.defer(),
-          product = _.findWhere(products, {id: parseInt(id)});
+          product = getById(id);
 
       if (product) {
         deferred.resolve(product);
@@ -90,8 +84,8 @@ angular.module('fauxcart.products')
       var deferred = $q.defer(),
           total = 0;
 
-      _.each(items, function(quantity, productId) {
-        var product = _.findWhere(products, {id: parseInt(productId)});
+      _.each(items, function(quantity, id) {
+        var product = getById(id);
         if (product) {
           total += product.price * quantity;
         }
