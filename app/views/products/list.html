@@ -6,10 +6,10 @@
     for
     ${{product.price}}
 
-    ({{cart.items[product.id].quantity}})
+    ({{cartItems[product.id]}})
     
-    <add-to-cart-button product="product" cart="cart"></add-to-cart-button>
+    <add-to-cart-button product="product"></add-to-cart-button>
   </li>
 </ul>
 
-<cart-total cart="cart"></cart-total>
+<cart-total cart-items="cartItems"></cart-total>

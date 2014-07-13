@@ -9,7 +9,7 @@
  */
 angular.module('fauxcart.cart')
 
-.directive('addToCartButton', ['cartItem', function(CartItem) {
+.directive('addToCartButton', ['cart', function(cart) {
 
   return {
     restrict: 'E',
@@ -20,8 +20,7 @@ angular.module('fauxcart.cart')
     },
     link: function(scope) {
       scope.addToCart = function() {
-        var item = new CartItem(scope.product.id);
-        item.save();
+        cart.add(scope.product.id);
       };
     }
   };

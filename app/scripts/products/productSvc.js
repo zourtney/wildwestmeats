@@ -71,7 +71,7 @@ angular.module('fauxcart.products')
      */
     get: function(id) {
       var deferred = $q.defer(),
-          product = _.findWhere(products, {id: id});
+          product = _.findWhere(products, {id: parseInt(id)});
 
       if (product) {
         deferred.resolve(product);
@@ -80,6 +80,25 @@ angular.module('fauxcart.products')
         deferred.reject('Not found');
       }
 
+      return deferred.promise;
+    },
+
+    /**
+     * Totals a list of (cart) items.
+     */
+    total: function(items) {
+      var deferred = $q.defer(),
+          total = 0;
+
+      _.each(items, function(quantity, productId) {
+        var product = _.findWhere(products, {id: parseInt(productId)});
+        if (product) {
+          total += product.price * quantity;
+        }
+        //else: you had an invalid product ID...uh, why?
+      });
+      
+      deferred.resolve(total);
       return deferred.promise;
     }
   };
