@@ -32,7 +32,7 @@ describe('Factory: inventory', function () {
   // Actual tests
   //
 
-  // `load`
+  // `query`
   it('should have a query() function', function() {
     expect(typeof inventory.query).toBe('function');
   });
