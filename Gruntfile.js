@@ -351,6 +351,16 @@ module.exports = function (grunt) {
           cwd: '.',
           src: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: '.',
+          src: 'bower_components/font-awesome/fonts/*',
+          dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: '.tmp/fonts',
+          dest: '<%= yeoman.dist %>/fonts',
+          src: ['*']
         }]
       },
       styles: {
@@ -358,13 +368,22 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      fonts: {
+        expand: true,
+        flatten: true,
+        src: [
+          'bower_components/font-awesome/fonts/*'
+        ],
+        dest: '.tmp/fonts'
       }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'sass:server'
+        'sass:server',
+        'copy:fonts'
       ],
       test: [
         'sass'
@@ -372,7 +391,8 @@ module.exports = function (grunt) {
       dist: [
         'sass:dist',
         'imagemin',
-        'svgmin'
+        'svgmin',
+        'copy:fonts'
       ]
     },
 
