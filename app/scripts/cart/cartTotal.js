@@ -19,11 +19,13 @@ angular.module('fauxcart.cart')
     },
     link: function(scope) {
       // Update the displayed total whenever the cart changes.
-      scope.$watchCollection('cartItems', function() {
-        inventory.total(scope.cartItems).then(function(val) {
-          scope.total = val;
+      scope.$watch('cartItems', function() {
+        var total = 0;
+        _.each(scope.cartItems, function(item) {
+          total += item.totalPrice;
         });
-      });
+        scope.total = total;
+      }, true);
     }
   };
 

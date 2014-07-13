@@ -7,15 +7,14 @@ describe('Factory: cart', function() {
 
   var $rootScope,
       cart,
-      defaultInventory;
+      mockProduct = {id: 1, name: 'Mock Product', price: 99};
 
   //
   // Setup
   //
-  beforeEach(inject(function(_$rootScope_, _cart_, _defaultInventory_) {
+  beforeEach(inject(function(_$rootScope_, _cart_) {
     $rootScope = _$rootScope_;
     cart = _cart_;
-    defaultInventory = _defaultInventory_;
   }));
 
 
@@ -42,16 +41,20 @@ describe('Factory: cart', function() {
     expect(typeof cart.add).toBe('function');
   });
 
-  it('should return 1 after calling add() once', function() {
-    cart.add(defaultInventory[0].id).then(function(data) {
-      expect(data).toBe(1);
+  it('should return an object with quantity = 1 after calling add() once', function() {
+    cart.query().then(function() {
+      cart.add(mockProduct).then(function(data) {
+        expect(data.quantity).toBe(1);
+      });
     });
     $rootScope.$apply();
   });
 
-  it('should return 2 after calling add() again', function() {
-    cart.add(defaultInventory[0].id).then(function(data) {
-      expect(data).toBe(2);
+  it('should return an object with quantity = 2 after calling add() again', function() {
+    cart.query().then(function() {
+      cart.add(mockProduct).then(function(data) {
+        expect(data.quantity).toBe(2);
+      });
     });
     $rootScope.$apply();
   });
@@ -60,8 +63,8 @@ describe('Factory: cart', function() {
     cart.query().then(function(data) {
       var keys = _.keys(data);
       expect(keys.length).toBe(1);
-      expect(parseInt(keys[0])).toBe(defaultInventory[0].id);
-      expect(data[keys[0]]).toBe(2);
+      expect(parseInt(keys[0])).toBe(mockProduct.id);
+      expect(data[keys[0]].quantity).toBe(2);
     });
     $rootScope.$apply();
   });

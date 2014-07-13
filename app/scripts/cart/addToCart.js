@@ -20,7 +20,7 @@ angular.module('fauxcart.cart')
     },
     link: function(scope) {
       scope.addToCart = function() {
-        cart.add(scope.product.id);
+        cart.add(scope.product);
       };
     }
   };
