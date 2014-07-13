@@ -1,3 +1,4 @@
+/*global _ */
 'use strict';
 
 /**
@@ -9,7 +10,7 @@
  */
 angular.module('fauxcart.cart')
 
-.directive('cartTotal', ['inventory', function(inventory) {
+.directive('cartTotal', [function() {
 
   return {
     restrict: 'E',

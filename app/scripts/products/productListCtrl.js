@@ -2,7 +2,7 @@
 
 angular.module('fauxcart.products')
 
-.controller('ProductListCtrl', ['$scope', 'inventory', 'cart', function($scope, inventory, cart) {
+.controller('ProductListCtrl', ['$scope', 'inventory', 'cart', 'discount', function($scope, inventory, cart, discount) {
 
   inventory.query().then(function(products) {
     $scope.products = products;
@@ -10,6 +10,10 @@ angular.module('fauxcart.products')
 
   cart.query().then(function(cartItems) {
     $scope.cartItems = cartItems;
+  });
+
+  discount.query().then(function(data) {
+    $scope.discounts = data;
   });
 
 }]);

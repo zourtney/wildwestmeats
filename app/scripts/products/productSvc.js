@@ -18,17 +18,20 @@ angular.module('fauxcart.products')
     {
       id: 1,
       name: 'Product A',
-      price: 20
+      price: 20,
+      discounts: []
     },
     {
       id: 2,
       name: 'Product B',
-      price: 50
+      price: 50,
+      discounts: []
     },
     {
       id: 3,
       name: 'Product C',
-      price: 30
+      price: 30,
+      discounts: []
     }
   ];
 })
@@ -36,17 +39,11 @@ angular.module('fauxcart.products')
 /**
  * Manager service for manipulating available products.
  */
-.factory('inventory', ['$q', 'localstorage', 'defaultInventory', function($q, localstorage, defaultInventory) {
+.factory('inventory', ['$q', 'defaultInventory', function($q, defaultInventory) {
 
-  // var INVENTORY_KEY = 'inventory',
-  var products;// = localstorage.get(INVENTORY_KEY) || defaultInventory;
-
-  // Helper function: load in and deserialize products
-  function loadAll() {
-    products = _.map(defaultInventory, function(product) {
-      return new Product(product);
-    });
-  }
+  var products = _.map(defaultInventory, function(product) {
+    return new Product(product);
+  });
 
   // Helper function: return a `Product` by its ID.
   function getById(id) {
@@ -58,22 +55,16 @@ angular.module('fauxcart.products')
    * Product class constructor.
    */
   function Product(members) {
-    // Copy object keys / vals onto `this`.
-    _.each(members, function(val, key) {
-      this[key] = val;
-    }, this);
+    this.id = members.id;
+    this.name = members.name;
+    this.price = members.price;
   }
 
   /**
-   * Returns all products available in the inventory. Builds from localstorage
-   * and caches the result into the local-only `products` array.
+   * Returns all products available in the inventory.
    * Meant to simulate a resource call like "GET /api/inventory/".
    */
   Product.query = function() {
-    if (! products) {
-      loadAll();
-    }
-
     var deferred = $q.defer();
     deferred.resolve(products);
     return deferred.promise;
@@ -84,10 +75,6 @@ angular.module('fauxcart.products')
    * Meant to simulate a resource call like "GET /api/inventory/1".
    */
   Product.get = function(id) {
-    if (! products) {
-      loadAll();
-    }
-
     var deferred = $q.defer(),
         product = getById(id);
 

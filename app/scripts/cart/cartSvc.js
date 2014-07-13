@@ -1,4 +1,3 @@
-/*global _ */
 'use strict';
 
 /**
@@ -9,15 +8,9 @@
  */
 angular.module('fauxcart.cart')
 
-.factory('cart', ['$q', 'localstorage', 'inventory', function($q, localstorage, inventory) {
+.factory('cart', ['$q', function($q) {
 
-  var CART_KEY = 'cart',
-      cartItems;
-
-  function loadAll() {
-
-  }
-
+  var cartItems;
 
   /**
    * CartItem class.
@@ -37,49 +30,24 @@ angular.module('fauxcart.cart')
   };
 
   CartItem.prototype._updatePrice = function() {
+    console.log(this.product.name + ' has ' + this.product.discounts + ' discounts.');
     this.totalPrice = this.product.price * this.quantity;
   };
 
 
   /**
    * Get all items in the cart. This will return an object with product IDs
-   * for keys and quanity as values. Builds from localstorage and caches the
-   * result in the local-only `cartItems` object.
+   * for keys and quantity as values.
    * Meant to simulate a resource call like "GET /api/cart/".
    */
   CartItem.query = function() {
     var deferred = $q.defer();
 
-    if (cartItems) {
-      // Return cached items
-      deferred.resolve(cartItems);
-    }
-    else {
-      // Load from localstorage and deserialize.
-      //TODO: clean this mess up
-      var items = localstorage.get(CART_KEY) || {},
-          numRequests = 0;
-
+    if (! cartItems) {
       cartItems = {};
-      
-      if (_.keys(items).length) {
-        _.each(items, function(val, key) {
-          ++numRequests;
-          inventory.get(key).then(function(data) {
-            --numRequests;
-            cartItems[key] = new CartItem(data, val);
-            
-            if (numRequests === 0) {
-              deferred.resolve(cartItems);
-            }
-          });
-        });
-      }
-      else {
-        deferred.resolve(cartItems);
-      }
     }
-
+    
+    deferred.resolve(cartItems);
     return deferred.promise;
   };
 
@@ -94,20 +62,8 @@ angular.module('fauxcart.cart')
     }
     cartItems[product.id].add(1);
 
-    CartItem.save();
     deferred.resolve(cartItems[product.id]);
     return deferred.promise;
-  };
-
-  /**
-   * Persist all cart items to localstorage.
-   * Reduces object down to a productID <-> quantity pair.
-   */
-  CartItem.save = function() {
-    var minimalObj = _.transform(cartItems, function(result, val, key) {
-      return result[key] = val.quantity;
-    });
-    localstorage.set(CART_KEY, minimalObj);
   };
 
   return CartItem;
