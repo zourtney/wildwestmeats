@@ -35,7 +35,8 @@ angular.module('fauxcart.cart')
       }
       cartItems[productId]++;
 
-      localstorage.set(CART_KEY, cartItems);  
+      localstorage.set(CART_KEY, cartItems);
+      deferred.resolve(cartItems[productId]);
       return deferred.promise;
     }
   };
