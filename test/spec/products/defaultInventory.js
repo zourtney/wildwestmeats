@@ -6,9 +6,22 @@ describe('Factory: detfaultInventory', function () {
 
   var di;
 
+  //
+  // Setup
+  //
   beforeEach(inject(function(defaultInventory) {
     di = defaultInventory;
   }));
+
+
+  //
+  // Actual tests
+  //
+  it('should contain a list of items that have an id property', function() {
+    angular.forEach(di, function(product) {
+      expect(product.id).toBeDefined();
+    });
+  });
 
   it('should contain a list of items that have a name property', function() {
     angular.forEach(di, function(product) {

@@ -4,17 +4,18 @@ describe('Factor: localstorage', function() {
 
   beforeEach(module('fauxcart.common'));
 
+  //
+  // Setup
+  //
   var ls;
   beforeEach(inject(function(localstorage) {
     ls = localstorage;
   }));
 
 
-  // Existential inquiry.
-  it('should exist', function () {
-    expect(ls).toBeTruthy();
-  });
-
+  //
+  // Actual tests
+  //
 
   // Simple strings
   it('should be able to set a string to window.localStorage', function() {
