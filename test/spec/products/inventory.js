@@ -4,18 +4,18 @@ describe('Factory: inventory', function () {
 
   beforeEach(module('fauxcart.products'));
 
-  var rootScope,
+  var $rootScope,
       inventory,
       defaultInventory;
 
   //
   // Setup
   //
-  beforeEach(inject(['$rootScope', 'inventory', 'defaultInventory', function($rootScope, theInventory, theDefaultInventory) {
-    rootScope = $rootScope;
-    inventory = theInventory;
-    defaultInventory = theDefaultInventory;
-  }]));
+  beforeEach(inject(function(_$rootScope_, _inventory_, _defaultInventory_) {
+    $rootScope = _$rootScope_;
+    inventory = _inventory_;
+    defaultInventory = _defaultInventory_;
+  }));
 
 
   //
@@ -46,7 +46,7 @@ describe('Factory: inventory', function () {
         expectEqual(item, defaultInventory[i]);
       });
     });
-    rootScope.$apply();
+    $rootScope.$apply();
   });
 
 
@@ -60,7 +60,7 @@ describe('Factory: inventory', function () {
     inventory.get(compareTo.id).then(function(data) {
       expectEqual(data, compareTo);
     });
-    rootScope.$apply();
+    $rootScope.$apply();
   });
 
   it('should reject an attempt get() a product by an invalid ID', function() {
@@ -72,7 +72,7 @@ describe('Factory: inventory', function () {
       .catch(function() {
         expect(true).toBe(true);
       });
-    rootScope.$apply();
+    $rootScope.$apply();
   });
 
 
