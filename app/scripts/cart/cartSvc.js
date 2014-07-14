@@ -30,8 +30,19 @@ angular.module('fauxcart.cart')
   };
 
   CartItem.prototype._updatePrice = function() {
-    console.log(this.product.name + ' has ' + this.product.discounts + ' discounts.');
-    this.totalPrice = this.product.price * this.quantity;
+    console.log(this.product.name + ' has ' + this.product.discounts.length + ' discounts.');
+    if (this.product.discounts.length) {
+      var total = 0;
+
+      _.each(this.product.discounts, function(discount) {
+        total += discount.getPriceFor(this.product.price, this.quantity);
+      }, this);
+
+      this.totalPrice = total;
+    }
+    else {
+      this.totalPrice = this.product.price * this.quantity;
+    }
   };
 
 

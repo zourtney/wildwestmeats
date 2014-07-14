@@ -8,29 +8,19 @@
  */
 angular.module('fauxcart.discounts')
 
-.factory('defaultDiscounts', function() {
-  return [
-    {
-      id: 1,
-      type: 'modulo',
-      getNum: 5,
-      forThePriceOfNum: 3
-    }
-  ];
-})
-
-.factory('discount', ['$q', 'defaultDiscounts', function($q, defaultDiscounts) {
-
-  var discounts = defaultDiscounts;
+.factory('discount', ['$q', function($q) {
 
   function Discount(members) {
-    this.type = members.type;
+    _.each(members, function(val, key) {
+      this[key] = val;
+    }, this);
   }
 
-  Discount.query = function() {
-    var deferred = $q.defer();
-    deferred.resolve(discounts);
-    return deferred.promise;
+  Discount.prototype.getPriceFor = function(price, quantity) {
+    if (this.type === 'modulo') {
+      return (Math.floor(quantity / this.getNum) * this.forThePriceOfNum * price) + ((quantity % this.getNum) * price);
+    }
+    return price * quantity;
   };
 
   return Discount;

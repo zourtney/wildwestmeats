@@ -16,20 +16,13 @@ angular.module('fauxcart', [
   // 'ngSanitize',
   // 'ngTouch',
   'fauxcart.common',
+  'fauxcart.discounts',
   'fauxcart.products',
   'fauxcart.cart'
 ])
 
 .config(function($routeProvider) {
   $routeProvider
-    // .when('/', {
-    //   templateUrl: 'views/main.html',
-    //   controller: 'MainCtrl'
-    // })
-    // .when('/about', {
-    //   templateUrl: 'views/about.html',
-    //   controller: 'AboutCtrl'
-    // })
     .otherwise({
       redirectTo: '/products'
     });
