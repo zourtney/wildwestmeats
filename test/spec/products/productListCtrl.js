@@ -2,64 +2,57 @@
 
 describe('Controller: ProductListCtrl', function () {
 
-    beforeEach(module('fauxcart.products'));
+  beforeEach(module('fauxcart.products'));
 
-    var ctrl,
-        scope,
-        mockProducts,
-        mockInventory,
-        mockCartItems,
-        mockCart;
+  var ctrl,
+      scope;
 
-    //
-    // Setup
-    //
-    mockProducts = [{id: 1, name: 'Product 1'}];
-    mockCartItems = {items: {1: 0}};
+  //
+  // Setup
+  //
+  beforeEach(inject(function($q, $controller, $rootScope) {
+    scope = $rootScope.$new();
 
-    beforeEach(inject(function($q, $controller, $rootScope) {
-      scope = $rootScope.$new();
+    scope.products = [{
+      id: 1, name: 'Product 1',
+      '$update': function() {
+        var deferred = $q.defer();
+        deferred.resolve();
+        return deferred.promise;
+      }
+    }];
+    spyOn(scope.products[0], '$update').and.callThrough();
 
-      mockInventory = {
-        query: function() {
-          return mockProducts;
-        }
-      };
-      spyOn(mockInventory, 'query').and.callThrough();
-
-      mockCart = {
-        get: function() {
-          return mockCartItems;
-        }
-      };
-      spyOn(mockCart, 'get').and.callThrough();
-
-      ctrl = $controller('ProductListCtrl', {
-        $scope: scope,
-        inventory: mockInventory,
-        cart: mockCart
-      });
-
-      $rootScope.$apply();
-    }));
-
-
-    //
-    // Actual tests
-    //
-    it('should call inventory.query()', function() {
-      expect(mockInventory.query).toHaveBeenCalled();
+    ctrl = $controller('ProductListCtrl', {
+      $scope: scope
     });
 
-    it('should attach a list of available items to the scope', function() {
-      expect(scope.products).toEqual(mockProducts);
-    });
+    $rootScope.$apply();
+  }));
 
-    it('should call cart.get()', function() {
-      expect(mockCart.get).toHaveBeenCalled();
-    });
 
-    it('should attach a list of cart items to the scope', function() {
-      expect(scope.cart).toEqual(mockCartItems);
-    });
+  //
+  // Actual tests
+  //
+  it('should have a saveProduct() function', function() {
+    expect(scope.saveProduct).toBeDefined();
+    expect(typeof scope.saveProduct).toBe('function');
+  });
+
+  it('should invoke product.$update when saveProduct() is called', function() {
+    var product = scope.products[0];
+    scope.saveProduct(product);
+    expect(product.$update).toHaveBeenCalled();
+  });
+
+  it('should broadcast a "priceStale" event when product.$update() is resolved from saveProduct()', inject(function($rootScope) {
+    var product = scope.products[0];
+    spyOn($rootScope, '$broadcast');
+    scope.saveProduct(product);
+    $rootScope.$apply();
+    expect($rootScope.$broadcast).toHaveBeenCalledWith('priceStale');
+  }));
+
+  //TODO: more tests
+
 });

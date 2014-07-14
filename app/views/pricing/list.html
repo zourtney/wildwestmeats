@@ -1,0 +1,16 @@
+<button class="btn btn-primary" ng-click="addRule()">
+  <i class="fa fa-plus"></i> Add rule
+</button>
+
+<ul>
+  <li ng-repeat="rule in pricingRules">
+    {{rule.name}}
+    is a
+    {{rule.type}}
+    with
+    {{rule.options}}
+
+    <button class="btn btn-default" ng-click="editRule(rule)">Edit</button>
+    <button class="btn btn-danger" ng-click="deleteRule(rule)">Delete</button>
+  </li>
+</ul>

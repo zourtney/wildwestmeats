@@ -48,6 +48,11 @@ describe('Factory: cart', function() {
       spyOn(cartInst, '$update').and.callThrough();
     }));
 
+    // `$update`
+    it('should have an $update() function on the prototype', function() {
+      expect(typeof cartInst.$update).toBe('function');
+    });
+
     // `add`
     it('should have an add() function on the prototype', function() {
       expect(typeof cartInst.add).toBe('function');
@@ -80,5 +85,7 @@ describe('Factory: cart', function() {
       });
     });
   });
+
+  //TODO: more tests
 
 });

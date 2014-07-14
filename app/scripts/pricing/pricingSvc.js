@@ -9,5 +9,7 @@
 angular.module('fauxcart.pricing')
 
 .factory('pricing', ['$resource', function($resource) {
-  return $resource('/api/pricing');
+  return $resource('/api/pricing/:id', { id: '@id' }, {
+    'update': { method: 'PUT' }
+  });
 }]);

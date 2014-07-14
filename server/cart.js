@@ -2,14 +2,20 @@ var _ = require('lodash');
 var Product = require('./product');
 var PricingRule = require('./pricingRule');
 
-//
-// Cart
-//
+/**
+ * Cart class
+ *
+ * A simple class that contains a productId <-> quantity hash as `items` and a
+ * running total of the calculated price.
+ */
 function Cart() {
   this.items = {};
   this.total = 0;
 }
 
+/**
+ * Recalculate the cart's total price.
+ */
 Cart.prototype.updateTotal = function() {
   var cartTotal = 0,
       productTotal;

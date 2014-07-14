@@ -13,6 +13,12 @@ function PricingRule(name, type, options) {
   this.options = options;
 }
 
+PricingRule.prototype.set = function(fields) {
+  this.name = fields.name;
+  this.type = fields.type;
+  this.options = fields.options;
+};
+
 PricingRule.prototype.getValue = function(price, quantity) {
   if (this.type === 'modulo') {
     var opts = this.options;
@@ -32,6 +38,20 @@ PricingRule.all = function() {
 PricingRule.add = function(inst) {
   pricingRules.push(inst);
 };
+
+PricingRule.removeById = function(id) {
+  var parsedId = parseInt(id);
+
+  // Splice out the rule. Do this instead of _.reject so we don't change our
+  // array reference.
+  for (var i = 0; i < pricingRules.length; i++) {
+    if (pricingRules[i].id === parsedId) {
+      pricingRules.splice(i, 1);
+      return true;
+    }
+  }
+  return false;
+}
 
 
 module.exports = PricingRule;

@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h3 class="modal-title">Edit {{product.name}}</h3>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label for="productName">Name</label>
+      <input type="text" class="form-control" id="productName" placeholder="Enter name" ng-model="product.name">
+    </div>
+    <div class="form-group">
+      <label for="productPrice">Price</label>
+      <input type="number" class="form-control" id="productPrice" placeholder="Enter price" ng-model="product.price">
+    </div>
+    <div class="form-group">
+      <label for="productPricingRule">Pricing rule</label>
+      <select class="form-control" ng-options="rule.id as rule.name for rule in pricingRules" ng-model="product.pricingRule"></select>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+  <button class="btn btn-primary" ng-click="$close()">Save</button>
+</div>
