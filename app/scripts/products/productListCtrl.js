@@ -7,8 +7,4 @@ angular.module('fauxcart.products')
   $scope.products = inventory.query();
   $scope.cart = cart.get();
 
-  $scope.addToCart = function(product) {
-    $scope.cart.add(product.id);
-  };
-
 }]);

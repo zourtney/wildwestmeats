@@ -7,7 +7,8 @@ describe('Factory: cart', function() {
 
   var $rootScope,
       cart,
-      mockProduct = {id: 1, name: 'Mock Product', price: 99};
+      cartInst,
+      mockProductId = 1;
 
   //
   // Setup
@@ -22,51 +23,62 @@ describe('Factory: cart', function() {
   // Actual tests
   //
 
-  // `query`
-  it('should have a query() function', function() {
-    expect(typeof cart.query).toBe('function');
+  // `get`
+  it('should have a get() function', function() {
+    expect(typeof cart.get).toBe('function');
   });
 
-  it('should return an empty object upon the first call to query()', function() {
-    cart.query().then(function(data) {
-      expect(data).toBeTruthy();
-      expect(_.keys(data).length).toBe(0);
+
+  describe('with an instance', function() {
+    // Mock out an instance of this resource. Thwart the `$update` function
+    // that gets called behind the scenes. (We only care that it's called).
+    var mockItems = {};
+    
+    beforeEach(inject(function($q) {
+      var Cart = cart;  // js hint annoyance...
+      cartInst = new Cart();
+      
+      cartInst.items = mockItems;
+      
+      cartInst.$update = function() {
+        var deferred = $q.defer();
+        deferred.resolve(cartInst);
+        return deferred.promise;
+      };
+      spyOn(cartInst, '$update').and.callThrough();
+    }));
+
+    // `add`
+    it('should have an add() function on the prototype', function() {
+      expect(typeof cartInst.add).toBe('function');
     });
-    $rootScope.$apply();
-  });
 
+    it('should return an object with quantity = 1 after calling add() once', function() {
+      cartInst.add(mockProductId).then(function(data) {
+        expect(data.items[mockProductId]).toBe(1);
+        expect(cartInst.$update).toHaveBeenCalled();
+      });
+      $rootScope.$apply();
+    });
 
-  // `add`
-  it('should have an add() function', function() {
-    expect(typeof cart.add).toBe('function');
-  });
+    it('should return an object with quantity = 2 after calling add() a second time', function() {
+      cartInst.add(mockProductId).then(function(data) {
+        expect(data.items[mockProductId]).toBe(2);
+        expect(cartInst.$update).toHaveBeenCalled();
+      });
+      $rootScope.$apply();
+    });
 
-  it('should return an object with quantity = 1 after calling add() once', function() {
-    cart.query().then(function() {
-      cart.add(mockProduct).then(function(data) {
-        expect(data.quantity).toBe(1);
+    // `clear`
+    it('should have an clear() function on the prototype', function() {
+      expect(typeof cartInst.clear).toBe('function');
+    });
+
+    it('should return an object with no keys after calling clear()', function() {
+      cartInst.clear().then(function(data) {
+        expect(_.keys(data).length).toBe(0);
       });
     });
-    $rootScope.$apply();
-  });
-
-  it('should return an object with quantity = 2 after calling add() again', function() {
-    cart.query().then(function() {
-      cart.add(mockProduct).then(function(data) {
-        expect(data.quantity).toBe(2);
-      });
-    });
-    $rootScope.$apply();
-  });
-
-  it('should be reflected in the dataset query() returns', function() {
-    cart.query().then(function(data) {
-      var keys = _.keys(data);
-      expect(keys.length).toBe(1);
-      expect(parseInt(keys[0])).toBe(mockProduct.id);
-      expect(data[keys[0]].quantity).toBe(2);
-    });
-    $rootScope.$apply();
   });
 
 });
