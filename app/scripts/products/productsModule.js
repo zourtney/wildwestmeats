@@ -10,7 +10,7 @@ angular.module('fauxcart.products', [
   'ngRoute',
   'ngResource',
   'fauxcart.common',
-  'fauxcart.discounts',
+  'fauxcart.pricing',
   'fauxcart.cart'
 ])
 

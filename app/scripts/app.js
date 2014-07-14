@@ -16,6 +16,7 @@ angular.module('fauxcart', [
   // 'ngSanitize',
   // 'ngTouch',
   'fauxcart.common',
+  'fauxcart.pricing',
   'fauxcart.products',
   'fauxcart.cart'
 ])

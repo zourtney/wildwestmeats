@@ -7,13 +7,50 @@ app.use(express.static(__dirname + '/dist'));
 app.use(bodyParser.json())
 
 
+
+//
+// PricingRules
+//
+function PricingRule(id, type, options) {
+  this.id = id;
+  this.type = type;
+  this.options = options;
+}
+
+PricingRule.prototype.getValue = function(price, quantity) {
+  if (this.type === 'modulo') {
+    var opts = this.options;
+    return (Math.floor(quantity / opts.getNum) * opts.forThePriceOf * price) + ((quantity % opts.getNum) * price);
+  }
+  return price * quantity;
+};
+
+PricingRule.getById = function(id) {
+  return _.findWhere(pricingRules, {id: id});
+}
+
+var pricingRules = [];
+
+app.get('/api/pricing', function(req, res) {
+  return res.json(pricingRules);
+});
+
+pricingRules.push(new PricingRule('standard'));
+pricingRules.push(new PricingRule('fiveForThree', 'modulo', { getNum: 5, forThePriceOf: 3 }));
+
+
+
+
+
+
 //
 // Products
 //
-function Product(id, name, price) {
+function Product(id, name, price, pricingRule) {
   this.id = id;
   this.name = name;
   this.price = price;
+  this.pricingRule = pricingRule;
 }
 
 var products = [];
@@ -36,29 +73,9 @@ app.get('/api/products/:id', function(req, res) {
 
 // Initialize app with a few exotic meats.
 products.push(new Product('product_a', 'Antelope', 20));
-products.push(new Product('product_b', 'Buffalo', 50));
+products.push(new Product('product_b', 'Buffalo', 50, 'fiveForThree'));
 products.push(new Product('product_c', 'Caribou', 30));
 
-
-
-
-
-//
-// PricingRules
-//
-// function PricingRule(type, options) {
-//   this.type = type;
-//   this.options = options;
-// }
-
-// PricingRule.prototype.applyRule = function(price, quantity) {
-//   return price * quantity;
-// };
-
-// var pricingRules = [
-//   new PricingRule('modulo', { getNum: 5, forThePriceOf: 3 })
-// ];
-// product[0].discounts = '';
 
 
 
@@ -80,7 +97,8 @@ Cart.prototype.updateTotal = function() {
   _.each(this.items, function(quantity, productId) {
     var product = Product.getById(productId);
     if (product) {
-      cartTotal += product.price * quantity;
+      var pricingRule = PricingRule.getById(product.pricingRule || 'standard');
+      cartTotal += pricingRule.getValue(product.price, quantity);
     }
   });
 

@@ -8,6 +8,5 @@
  * A collection of products to be purchased
  */
 angular.module('fauxcart.cart', [
-  'ngRoute',
   'ngResource'
 ]);
