@@ -1,4 +1,4 @@
-<h1>Products</h1>
+<h1>Exotic Meat Market</h1>
 
 <ul>
   <li ng-repeat="product in products">
@@ -6,10 +6,12 @@
     for
     ${{product.price}}
 
-    ({{cartItems[product.id].quantity}})
+    ({{cart.items[product.id]}})
     
-    <add-to-cart-button product="product"></add-to-cart-button>
+    <button class="btn btn-default" ng-click="addToCart(product)">
+      <i class="fa fa-shopping-cart"></i> Add to cart
+    </button>
   </li>
 </ul>
 
-<cart-total cart-items="cartItems"></cart-total>
+Total: ${{cart.total}}
