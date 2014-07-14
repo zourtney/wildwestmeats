@@ -7,6 +7,8 @@
     ${{product.price}}
     <select ng-options="rule.id as rule.name for rule in pricingRules" ng-model="product.pricingRule"></select>
     pricing rules
+
+    <button class="btn btn-default" ng-click="saveProduct(product)">Save</button>
   </li>
 </ul>
 

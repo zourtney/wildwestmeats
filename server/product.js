@@ -13,6 +13,12 @@ function Product(name, price, pricingRule) {
   this.pricingRule = pricingRule;
 }
 
+Product.prototype.set = function(fields) {
+  this.name = fields.name;
+  this.price = fields.price;
+  this.pricingRule = fields.pricingRule;
+};
+
 Product.getById = function(id) {
   return _.findWhere(products, {id: parseInt(id)});
 };

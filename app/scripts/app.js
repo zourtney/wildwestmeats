@@ -36,4 +36,8 @@ angular.module('fauxcart', [
   $scope.pricingRules = pricing.query();
   $scope.cart = cart.get();
 
+  $scope.$on('priceStale', function() {
+    $scope.cart.$get();
+  });
+
 }]);

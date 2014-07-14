@@ -49,9 +49,9 @@ app.get('/api/pricing', function(req, res) {
   return res.json(PricingRule.all());
 });
 
-app.post('/api/pricing', function(req, res) {
-  var rule = new PricingRule(req.body.name, req.body.type);
-});
+// app.post('/api/pricing', function(req, res) {
+//   var rule = new PricingRule(req.body.name, req.body.type);
+// });
 
 
 // Products
@@ -60,8 +60,25 @@ app.get('/api/products', function(req, res) {
 });
 
 app.get('/api/products/:id', function(req, res) {
-  var produc = Product.getById(req.params.id);
+  var product = Product.getById(req.params.id);
   if (product) {
+    return res.json(product);
+  }
+  return res.status(404).json({ message: 'Not found' });
+});
+
+app.put('/api/products/:id', function(req, res) {
+  var product = Product.getById(req.params.id);
+
+  if (product) {
+    // Copy over properties
+    product.set(req.body);
+    
+    // Update cart, if needed
+    if (cart.items[product.id]) {
+      cart.updateTotal();
+    }
+
     return res.json(product);
   }
   return res.status(404).json({ message: 'Not found' });
