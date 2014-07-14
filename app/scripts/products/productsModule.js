@@ -1,11 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name fauxcart.products
- * @description
- * # Products module
- */
 angular.module('fauxcart.products', [
   'ngRoute',
   'ngResource',

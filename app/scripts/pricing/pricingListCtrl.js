@@ -15,7 +15,7 @@ angular.module('fauxcart.pricing')
   function saveRule(rule) {
     var method = rule.id ? '$update' : '$save';  // use: $update (PUT) or $save (POST)
     
-    rule[method]().then(function(data) {
+    rule[method]().then(function() {
       // Add rule to global set if needed (only on POST)
       if (! _.contains($scope.pricingRules, rule)) {
         $scope.pricingRules.push(rule);
@@ -36,7 +36,7 @@ angular.module('fauxcart.pricing')
         $scope.pricingRules.splice(i, 1);
       }
     });
-  };
+  }
 
 
 
@@ -61,7 +61,8 @@ angular.module('fauxcart.pricing')
   };
 
   $scope.addRule = function() {
-    $scope.editRule(new pricing());
+    var PricingRule = pricing;  // to appease js-hint's "looks like a constructor" message...TODO: fix service name.
+    $scope.editRule(new PricingRule());
   };
 
   $scope.deleteRule = function(rule) {

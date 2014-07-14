@@ -17,6 +17,9 @@ angular.module('fauxcart.products')
       resolve: {
         product: function() {
           return product;
+        },
+        pricingRules: function() {
+          return $scope.pricingRules;
         }
       }
     });

@@ -2,9 +2,9 @@
 
 angular.module('fauxcart.products')
 
-.controller('ProductEditCtrl', ['$scope', 'pricing', 'product', function($scope, pricing, product) {
+.controller('ProductEditCtrl', ['$scope', 'product', 'pricingRules', function($scope, product, pricingRules) {
 
   $scope.product = product;
-  $scope.pricingRules = pricing.query();
+  $scope.pricingRules = pricingRules;
 
 }]);

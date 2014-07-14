@@ -1,13 +1,10 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name fauxcart.cart:cartSvc
- * @description
- * # cart
- */
 angular.module('fauxcart.cart')
 
+/**
+ * Manager service for manipulating the cart pseudo-singleton.
+ */
 .factory('cart', ['$q', '$http', '$resource', function($q, $http, $resource) {
 
   var cart = $resource('/api/cart/', null, {

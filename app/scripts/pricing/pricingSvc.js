@@ -1,15 +1,14 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name fauxcart.pricing:pricing
- * @description
- * # Discount
- */
 angular.module('fauxcart.pricing')
 
+/**
+ * Manager service for manipulating available pricing rules.
+ */
 .factory('pricing', ['$resource', function($resource) {
+
   return $resource('/api/pricing/:id', { id: '@id' }, {
     'update': { method: 'PUT' }
   });
+
 }]);
