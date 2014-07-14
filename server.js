@@ -25,13 +25,16 @@ var cart = require(__dirname + '/server/cart');
 // ----------------------------------------------------------------------------
 
 // Pricing rules
-PricingRule.add(new PricingRule('standard'));
-PricingRule.add(new PricingRule('fiveForThree', 'modulo', { getNum: 5, forThePriceOf: 3 }));
+var stardardPricing = new PricingRule('standard'),
+    fiveForThreePricing = new PricingRule('fiveForThree', 'modulo', { getNum: 5, forThePriceOf: 3 });
+
+PricingRule.add(stardardPricing);
+PricingRule.add(fiveForThreePricing);
 
 // Products (initialize with a few exotic meats!)
-Product.add(new Product('product_a', 'Antelope', 20));
-Product.add(new Product('product_b', 'Buffalo', 50, 'fiveForThree'));
-Product.add(new Product('product_c', 'Caribou', 30));
+Product.add(new Product('Antelope', 20, stardardPricing.id));
+Product.add(new Product('Buffalo', 50, fiveForThreePricing.id));
+Product.add(new Product('Caribou', 30, stardardPricing.id));
 
 
 
@@ -44,6 +47,10 @@ Product.add(new Product('product_c', 'Caribou', 30));
 // Pricing
 app.get('/api/pricing', function(req, res) {
   return res.json(PricingRule.all());
+});
+
+app.post('/api/pricing', function(req, res) {
+  var rule = new PricingRule(req.body.name, req.body.type);
 });
 
 

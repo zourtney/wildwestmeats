@@ -19,7 +19,7 @@ Cart.prototype.updateTotal = function() {
     // Apply its pricing rule, and increment the cart total.
     //NOTE: currently limited to one pricing rule per product.
     var product = Product.getById(productId),
-        pricingRule = PricingRule.getById(product.pricingRule || 'standard');
+        pricingRule = PricingRule.getById(product.pricingRule);
     cartTotal += pricingRule.getValue(product.price, quantity);
   });
 

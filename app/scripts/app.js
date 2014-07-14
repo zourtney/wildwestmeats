@@ -23,15 +23,17 @@ angular.module('fauxcart', [
 
 .config(function($routeProvider) {
   $routeProvider
-    // .when('/', {
-    //   templateUrl: 'views/main.html',
-    //   controller: 'MainCtrl'
-    // })
-    // .when('/about', {
-    //   templateUrl: 'views/about.html',
-    //   controller: 'AboutCtrl'
-    // })
     .otherwise({
-      redirectTo: '/products'
+      redirectTo: '/cart'
     });
-});
+})
+
+.controller('appCtrl', ['$scope', 'inventory', 'pricing', 'cart', function($scope, inventory, pricing, cart) {
+
+  // These are being put at the "global scope" to satisfy the requirement that
+  // the application should be able to update dynamically without a full refresh.
+  $scope.products = inventory.query();
+  $scope.pricingRules = pricing.query();
+  $scope.cart = cart.get();
+
+}]);

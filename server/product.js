@@ -3,17 +3,18 @@ var _ = require('lodash');
 //
 // Products
 //
+var lastId = 0;
 var products = [];
 
-function Product(id, name, price, pricingRule) {
-  this.id = id;
+function Product(name, price, pricingRule) {
+  this.id = ++lastId;
   this.name = name;
   this.price = price;
   this.pricingRule = pricingRule;
 }
 
 Product.getById = function(id) {
-  return _.findWhere(products, {id: id});
+  return _.findWhere(products, {id: parseInt(id)});
 };
 
 Product.all = function() {

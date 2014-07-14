@@ -10,8 +10,7 @@ angular.module('fauxcart.products', [
   'ngRoute',
   'ngResource',
   'fauxcart.common',
-  'fauxcart.pricing',
-  'fauxcart.cart'
+  'fauxcart.pricing'
 ])
 
 .config(['$routeProvider', function($routeProvider) {

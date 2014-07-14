@@ -3,10 +3,12 @@ var _ = require('lodash');
 //
 // PricingRules
 //
+var lastId = 0;
 var pricingRules = [];
 
-function PricingRule(id, type, options) {
-  this.id = id;
+function PricingRule(name, type, options) {
+  this.id = ++lastId;
+  this.name = name;
   this.type = type;
   this.options = options;
 }
@@ -20,7 +22,7 @@ PricingRule.prototype.getValue = function(price, quantity) {
 };
 
 PricingRule.getById = function(id) {
-  return _.findWhere(pricingRules, {id: id});
+  return _.findWhere(pricingRules, {id: parseInt(id)});
 }
 
 PricingRule.all = function() {

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="fauxcart">
+  <body ng-app="fauxcart" ng-controller="appCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -25,6 +25,7 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a ng-href="#">Home</a></li>
+          <li><a ng-href="#products">Products</a></li>
         </ul>
         <h3 class="text-muted">fauxcart</h3>
       </div>
@@ -73,7 +74,6 @@
         <script src="scripts/app.js"></script>
 
         <script src="scripts/common/commonModule.js"></script>
-        <script src="scripts/common/localStorage.js"></script>
 
         <script src="scripts/pricing/pricingModule.js"></script>
         <script src="scripts/pricing/pricingSvc.js"></script>
@@ -83,6 +83,7 @@
         <script src="scripts/products/productSvc.js"></script>
 
         <script src="scripts/cart/cartModule.js"></script>
+        <script src="scripts/cart/cartListCtrl.js"></script>
         <script src="scripts/cart/cartSvc.js"></script>
         <!-- endbuild -->
 </body>
