@@ -94,12 +94,13 @@ Cart.prototype.updateTotal = function() {
   var cartTotal = 0,
       productTotal;
   
+  // For every product in the cart...
   _.each(this.items, function(quantity, productId) {
-    var product = Product.getById(productId);
-    if (product) {
-      var pricingRule = PricingRule.getById(product.pricingRule || 'standard');
-      cartTotal += pricingRule.getValue(product.price, quantity);
-    }
+    // Apply its pricing rule, and increment the cart total.
+    //NOTE: currently limited to one pricing rule per product.
+    var product = Product.getById(productId),
+        pricingRule = PricingRule.getById(product.pricingRule || 'standard');
+    cartTotal += pricingRule.getValue(product.price, quantity);
   });
 
   this.total = cartTotal;
@@ -112,10 +113,7 @@ app.get('/api/cart', function(req, res) {
 });
 
 app.put('/api/cart', function(req, res) {
-  _.each(req.body.items, function(val, key) {
-    cart.items[key] = val;
-  });
-
+  cart.items = req.body.items;
   cart.updateTotal();
   return res.json(cart);
 });

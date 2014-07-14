@@ -31,6 +31,16 @@ angular.module('fauxcart.cart')
     return this.$update();
   };
 
+  /**
+   * Removes all items from the cart's hash, then calls "PUT /api/cart" and
+   * returns a promise.
+   */
+  cart.prototype.clear = function() {
+    // Clear out items, then persist.
+    this.items = {};
+    return this.$update();
+  };
+
   return cart;
 
 }]);
