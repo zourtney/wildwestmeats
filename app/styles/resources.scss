@@ -1,0 +1,24 @@
+.resource-controls {
+  float: right;
+  margin-top: 20px;
+}
+
+.resource-list {
+  @extend .list-unstyled;
+}
+
+.resource-list-item {
+  border-bottom: 1px solid $gray-light;
+  margin: 15px 0;
+  padding: 15px 0;
+
+  .title {
+    font-size: 18px;
+  }
+  .details {
+    padding: 2px 0;
+  }
+  .controls {
+    float: right;
+  }
+}

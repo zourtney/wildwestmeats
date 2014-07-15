@@ -1,12 +1,18 @@
-<!--<h1>All Products</h1>-->
+<h1>Products</h1>
 
-<ul>
-  <li ng-repeat="product in products">
-    {{product.name}}
-    for
-    ${{product.price}},
-    applying pricing rule {{product.pricingRule}}.
+<ul class="resource-list">
+  <li ng-repeat="product in products" class="resource-list-item">
+    <h2 class="title">{{product.name}}</h2>
 
-    <button class="btn btn-default" ng-click="editProduct(product)">Edit</button>
+    <div class="controls">
+      <button class="btn btn-link" ng-click="editProduct(product)">edit</button>
+    </div>
+    
+    <div class="details">
+      <em>Cost:</em> ${{product.price}} per unit
+    </div>
+    <div class="details">
+      <em>Pricing rule:</em> {{pricingRules[product.pricingRule].name}}
+    </div>
   </li>
 </ul>

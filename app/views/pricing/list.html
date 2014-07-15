@@ -1,16 +1,23 @@
-<button class="btn btn-primary" ng-click="addRule()">
+<button class="btn btn-primary resource-controls" ng-click="addRule()">
   <i class="fa fa-plus"></i> Add rule
 </button>
 
-<ul>
-  <li ng-repeat="rule in pricingRules">
-    {{rule.name}}
-    is a
-    {{rule.type}}
-    with
-    {{rule.options}}
+<h1>Pricing rules</h1>
 
-    <button class="btn btn-default" ng-click="editRule(rule)">Edit</button>
-    <button class="btn btn-danger" ng-click="deleteRule(rule)">Delete</button>
+<ul class="resource-list">
+  <li ng-repeat="rule in pricingRules" class="resource-list-item">
+    <h2 class="title">{{rule.name}}</h2>
+
+    <div class="controls">
+      <button class="btn btn-link" ng-click="editRule(rule)">edit</button>
+      <button class="btn btn-link" ng-click="deleteRule(rule)"><span class="text-danger">delete</span></button>
+    </div>
+    
+    <div class="details">
+      <em>Type:</em> {{rule.type}}
+    </div>
+    <div class="details">
+      <em>Options:</em> {{rule.option}}
+    </div>
   </li>
 </ul>

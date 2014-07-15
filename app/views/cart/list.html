@@ -1,19 +1,28 @@
 <!--<h1>Exotic Meat Market Checkout</h1>-->
+<div class="cart-price">
+  <i class="fa fa-shopping-cart cart-icon"></i>
+  <span class="price">${{cart.total}}</span>
+  <button class="btn btn-link" ng-click="cart.clear()">empty</button>
+</div>
 
-<ul>
-  <li ng-repeat="product in products">
-    {{product.name}}
-    for
-    ${{product.price}}
 
-    ({{cart.items[product.id]}})
-    
-    <button class="btn btn-default" ng-click="cart.add(product.id)">
-      <i class="fa fa-shopping-cart"></i> Add to cart
-    </button>
+<ul class="cart-list">
+  <li ng-repeat="product in products" class="cart-list-item col-sm-6 col-md-4">
+    <div class="contents">
+      <h2 class="title">{{product.name}}</h1>
+  
+      <div class="details">
+        <span ng-show="!!cart.items[product.id]">
+          <strong>{{cart.items[product.id]}}x</strong> @
+        </span>
+        ${{product.price}} per unit
+      </div>
+      
+      <div class="controls">
+        <button class="btn btn-default" ng-click="cart.add(product.id)">
+          <i class="fa fa-shopping-cart"></i> Add to cart
+        </button>
+      </div>
+    </div>
   </li>
 </ul>
-
-Total: ${{cart.total}}
-
-<button class="btn btn-link" ng-click="cart.clear()">Empty cart</button>

@@ -1,0 +1,50 @@
+.cart-price {
+  margin-bottom: 20px;
+
+  .cart-icon {
+    font-size: 48px;
+  }
+  .price {
+    margin-left: 8px;
+    font-size: 24px;
+  }
+}
+
+.cart-list {
+  @extend .list-unstyled;
+}
+
+.cart-list-item {
+  .contents {
+    border: 1px solid $gray;
+    text-align: center;
+    margin: 40px;
+    padding-bottom: 20px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .details {
+    padding: 2px 0;
+  }
+  .controls {
+    margin-top: 8px;
+  }
+}
+
+// Strip out some padding / margin on smaller screens.
+@media (max-width: 1199px) {
+  .cart-list-item {
+    .contents {
+      margin: 20px;
+    }
+  }
+}
+
+@media (max-width: 767px) { 
+  .cart-list-item {
+    .contents {
+      margin: -1px 15px;  // puts it into a vertical list
+    }
+  }
+}
