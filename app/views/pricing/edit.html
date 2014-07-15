@@ -15,16 +15,31 @@
       <select class="form-control" ng-model="rule.type">
         <option value="straight">Straight pricing</option>
         <option value="modulo">Modulo (x for the price of x)</option>
+        <option value="percentage">Percentage (% off)</option>
       </select>
     </div>
+
+    <!-- Options for 'modulo' style pricing -->
     <div ng-show="rule.type === 'modulo'">
       <div class="form-group">
         <label>Rule options</label>
         <div>
           Get
-          <input type="number" class="form-control inline-form-control" id="ruleGetNum" placeholder="Enter 'get' number" ng-model="rule.options.getNum">
+          <input type="number" class="form-control inline-form-control" placeholder="Enter 'get' number" ng-model="rule.options.getNum">
           for the price of
-          <input type="number" class="form-control inline-form-control" id="ruleForThePriceOf" placeholder="Enter 'for the price of' number" ng-model="rule.options.forThePriceOf">
+          <input type="number" class="form-control inline-form-control" placeholder="Enter 'for the price of' number" ng-model="rule.options.forThePriceOf">
+        </div>
+      </div>
+    </div>
+
+    <!-- Options for 'percentage off' style pricing -->
+    <div ng-show="rule.type === 'percentage'">
+      <div class="form-group">
+        <label>Rule options</label>
+        <div>
+          Take
+          <input type="number" class="form-control inline-form-control"  placeholder="Enter %" ng-model="rule.options.percentOff">
+          % off
         </div>
       </div>
     </div>
