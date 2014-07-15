@@ -43,7 +43,7 @@
     <span class="price">${{cart.total}}</span>
   </div>
 
-  <button class="btn btn-lg btn-primary" ng-disabled="cart.price === 0">Check out</button>
+  <button class="btn btn-lg btn-primary" ng-click="checkOut()">Check out</button>
 
   <div class="center-block cart-empty">
     Changed your mind? You can <button class="btn btn-link" ng-click="emptyCart()">empty</button> your cart.
