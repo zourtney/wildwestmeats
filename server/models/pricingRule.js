@@ -25,19 +25,24 @@ PricingRule.prototype = Object.create(BaseClass.prototype);
  * applied.
  */
 PricingRule.prototype.getValue = function(price, quantity) {
-  var opts = this.options;
+  var opts = this.options,
+      total;
 
-  // Modulo pricing: 'get x for the price of x'.
   if (this.type === 'modulo') {
-    return (Math.floor(quantity / opts.getNum) * opts.forThePriceOf * price) + ((quantity % opts.getNum) * price);
+    // Modulo pricing: 'get x for the price of x'.
+    total = (Math.floor(quantity / opts.getNum) * opts.forThePriceOf * price) + ((quantity % opts.getNum) * price);
+  }
+  else if (this.type === 'percentage') {
+    // Percentage pricing: '70% off' (but seriously, never buy meat on clearance).
+    total = price * quantity * (1 - (opts.percentOff / 100));
+  }
+  else {
+    // Straight pricing
+    total = price * quantity;
   }
 
-  // Percentage pricing: '70% off' (but seriously, never buy meat on clearance).
-  if (this.type === 'percentage') {
-    return price * quantity * (1 - (opts.percentOff / 100));
-  }
-
-  return price * quantity;
+  // Return as a money-looking value (to two decimal places).
+  return parseFloat(total.toFixed(2));
 };
 
 
