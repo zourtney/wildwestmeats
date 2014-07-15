@@ -7,8 +7,15 @@ angular.module('fauxcart.pricing')
  */
 .factory('PricingRule', ['$resource', function($resource) {
 
-  return $resource('/api/pricing/:id', { id: '@id' }, {
-    'update': { method: 'PUT' }
+  var PricingRule = $resource('/api/pricing/:id', { id: '@id' }, {
+    'update': { method: 'PUT' },
+    '_query': { method: 'GET', isArray: true }
   });
+
+  PricingRule.query = function() {
+    return PricingRule.prototype.$_query.apply(this, arguments);
+  };
+
+  return PricingRule;
 
 }]);
