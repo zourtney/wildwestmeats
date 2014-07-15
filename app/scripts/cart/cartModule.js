@@ -3,6 +3,7 @@
 angular.module('fauxcart.cart', [
   'ngRoute',
   'ngResource',
+  'ui.bootstrap',
   'fauxcart.products'
 ])
 
