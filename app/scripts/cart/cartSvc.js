@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fauxcart.cart')
+angular.module('wildwestmeats.cart')
 
 /**
  * Manager service for manipulating the cart pseudo-singleton.

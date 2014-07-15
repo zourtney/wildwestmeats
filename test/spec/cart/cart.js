@@ -3,7 +3,7 @@
 
 describe('Factory: cart', function() {
 
-  beforeEach(module('fauxcart.cart'));
+  beforeEach(module('wildwestmeats.cart'));
 
   var $rootScope,
       cart,

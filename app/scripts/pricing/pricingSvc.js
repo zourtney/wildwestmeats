@@ -1,7 +1,7 @@
 /*global _ */
 'use strict';
 
-angular.module('fauxcart.pricing')
+angular.module('wildwestmeats.pricing')
 
 /**
  * Manager service for manipulating available pricing rules.

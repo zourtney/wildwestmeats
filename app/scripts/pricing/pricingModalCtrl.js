@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fauxcart.pricing')
+angular.module('wildwestmeats.pricing')
 
 //NOTE: this is a catch-all controller for pricing-related modals since there
 //      is no real logic needed on these screens (yet);

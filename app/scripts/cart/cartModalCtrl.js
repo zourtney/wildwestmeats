@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fauxcart.cart')
+angular.module('wildwestmeats.cart')
 
 //NOTE: this is a catch-all controller for cart-related modals. No
 //      implementation yet.

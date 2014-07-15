@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fauxcart.cart')
+angular.module('wildwestmeats.cart')
 
 .controller('CartListCtrl', ['$rootScope', '$scope', '$modal', function($rootScope, $scope, $modal) {
 

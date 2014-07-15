@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('fauxcart.common', []);
+angular.module('wildwestmeats.common', []);
 
 // No common config, run blocks, or anything yet...wow!

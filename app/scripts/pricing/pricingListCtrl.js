@@ -1,7 +1,7 @@
 /*global _ */
 'use strict';
 
-angular.module('fauxcart.pricing')
+angular.module('wildwestmeats.pricing')
 
 .controller('PricingListCtrl', ['$rootScope', '$scope', '$modal', 'PricingRule', function($rootScope, $scope, $modal, PricingRule) {
 

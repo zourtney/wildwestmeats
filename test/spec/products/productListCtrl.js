@@ -2,7 +2,7 @@
 
 describe('Controller: ProductListCtrl', function () {
 
-  beforeEach(module('fauxcart.products'));
+  beforeEach(module('wildwestmeats.products'));
 
   var ctrl,
       scope;

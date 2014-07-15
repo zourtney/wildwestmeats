@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fauxcart.products')
+angular.module('wildwestmeats.products')
 
 /**
  * Manager service for manipulating available products.

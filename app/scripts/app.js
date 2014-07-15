@@ -1,12 +1,12 @@
 /*global _ */
 'use strict';
 
-angular.module('fauxcart', [
+angular.module('wildwestmeats', [
   'ngRoute',
-  'fauxcart.common',
-  'fauxcart.pricing',
-  'fauxcart.products',
-  'fauxcart.cart'
+  'wildwestmeats.common',
+  'wildwestmeats.pricing',
+  'wildwestmeats.products',
+  'wildwestmeats.cart'
 ])
 
 .config(function($routeProvider) {

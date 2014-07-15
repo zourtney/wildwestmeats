@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fauxcart.products')
+angular.module('wildwestmeats.products')
 
 .controller('ProductModalCtrl', ['$scope', 'product', 'pricingRules', function($scope, product, pricingRules) {
 

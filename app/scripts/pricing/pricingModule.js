@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('fauxcart.pricing', [
+angular.module('wildwestmeats.pricing', [
   'ngRoute',
   'ngResource',
   'ui.bootstrap',
-  'fauxcart.common'
+  'wildwestmeats.common'
 ])
 
 /**
