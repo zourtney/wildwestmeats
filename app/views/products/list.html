@@ -13,7 +13,7 @@
         <em>Cost:</em> ${{product.price}} per unit
       </div>
       <div class="details">
-        <em>Pricing rule:</em> {{pricingRules[product.pricingRule].name}}
+        <em>Pricing rule:</em> {{getPricingRule(product).name}}
       </div>
     </div>
 

@@ -1,3 +1,4 @@
+/*global _ */
 'use strict';
 
 angular.module('fauxcart.products')
@@ -44,6 +45,14 @@ angular.module('fauxcart.products')
     modalInstance.result.then(function() {
       $scope.saveProduct(product);
     });
+  };
+
+  /**
+   * Returns the pricing rule associated with this product.
+   */
+  $scope.getPricingRule = function(product) {
+    //TODO: consider putting this into a service of sorts.
+    return _.findWhere($scope.pricingRules, { id: parseInt(product.pricingRule) });
   };
 
 }]);
