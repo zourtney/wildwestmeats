@@ -39,11 +39,13 @@
 
 <div class="cart-checkout">
   <div class="cart-price">
-    <i class="fa fa-shopping-cart cart-icon"></i>
     <span class="price">${{cart.total}}</span>
   </div>
 
-  <button class="btn btn-lg btn-primary" ng-click="checkOut()" ng-disabled="cart.total === 0">Check out</button>
+  <button class="btn btn-lg btn-primary" ng-click="checkOut()" ng-disabled="cart.total === 0">
+    <i class="fa fa-shopping-cart"></i>
+    Check out
+  </button>
 
   <div class="center-block cart-empty">
     Changed your mind? You can <button class="btn btn-link" ng-click="emptyCart()">empty</button> your cart.

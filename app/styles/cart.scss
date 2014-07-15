@@ -12,12 +12,9 @@
 
 // The big cart and dollar sign in the checkout section.
 .cart-price {
-  .cart-icon {
-    font-size: 48px;
-  }
   .price {
-    margin-left: 8px;
-    font-size: 24px;
+    display: block;
+    font-size: 42px;
   }
 }
 
