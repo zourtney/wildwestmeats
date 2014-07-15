@@ -4,15 +4,23 @@
   <li ng-repeat="product in products" class="resource-list-item">
     <h2 class="title">{{product.name}}</h2>
 
+    <div class="product-thumbnail">
+      <img src="{{product.imageUrl}}" class="img-responsive img-thumbnail" />
+    </div>
+
+    <div class="pull-left">
+      <div class="details">
+        <em>Cost:</em> ${{product.price}} per unit
+      </div>
+      <div class="details">
+        <em>Pricing rule:</em> {{pricingRules[product.pricingRule].name}}
+      </div>
+    </div>
+
     <div class="controls">
       <button class="btn btn-link" ng-click="editProduct(product)">edit</button>
     </div>
-    
-    <div class="details">
-      <em>Cost:</em> ${{product.price}} per unit
-    </div>
-    <div class="details">
-      <em>Pricing rule:</em> {{pricingRules[product.pricingRule].name}}
-    </div>
+
+    <div class="clearfix"></div>
   </li>
 </ul>

@@ -16,10 +16,13 @@
 
 .cart-list-item {
   .contents {
-    border: 1px solid $gray;
     text-align: center;
     margin: 40px;
-    padding-bottom: 20px;
+    padding: 15px 15px 20px 15px;
+
+    &:hover {
+      background: rgba($gray-light, 0.1);
+    }
   }
   .title {
     font-size: 24px;
@@ -29,6 +32,15 @@
   }
   .controls {
     margin-top: 8px;
+  }
+  .product-image-container {
+    padding: 8px;
+  }
+  .product-image {
+    display: inline;
+    border: 1px solid $gray;
+    padding: 10px;
+    box-shadow: 1px 1px 0 rgba($gray, 0.5);
   }
 }
 

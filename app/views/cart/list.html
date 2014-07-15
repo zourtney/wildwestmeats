@@ -5,11 +5,14 @@
   <button class="btn btn-link" ng-click="cart.clear()">empty</button>
 </div>
 
-
 <ul class="cart-list">
   <li ng-repeat="product in products" class="cart-list-item col-sm-6 col-md-4">
     <div class="contents">
       <h2 class="title">{{product.name}}</h2>
+
+      <div class="product-image-container">
+        <img src="{{product.imageUrl}}" class="img-responsive img-circle product-image" />
+      </div>
   
       <div class="details">
         <span ng-show="!!cart.items[product.id]">

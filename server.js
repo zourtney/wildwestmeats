@@ -31,9 +31,9 @@ PricingRule.add(stardardPricing);
 PricingRule.add(fiveForThreePricing);
 
 // Products (initialize with a few exotic meats!)
-Product.add(new Product('Antelope', 20, stardardPricing.id));
-Product.add(new Product('Buffalo', 50, fiveForThreePricing.id));
-Product.add(new Product('Caribou', 30, stardardPricing.id));
+Product.add(new Product('Antelope meat', 20, stardardPricing.id, '/images/antelope.jpg'));
+Product.add(new Product('Buffalo meat', 50, fiveForThreePricing.id, '/images/buffalo.jpg'));
+Product.add(new Product('Caribou meat', 30, stardardPricing.id, '/images/caribou.jpg'));
 
 
 

@@ -15,6 +15,10 @@
       <label for="productPricingRule">Pricing rule</label>
       <select class="form-control" ng-options="rule.id as rule.name for rule in pricingRules" ng-model="product.pricingRule"></select>
     </div>
+    <div class="form-group">
+      <label for="productImageUrl">Image URL</label>
+      <input type="text" class="form-control" id="productImageUrl" placeholder="Enter URL" ng-model="product.imageUrl">
+    </div>
   </form>
 </div>
 <div class="modal-footer">

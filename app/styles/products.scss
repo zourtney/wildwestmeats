@@ -1,0 +1,11 @@
+.product-thumbnail {
+  width: 150px;
+  float: left;
+  margin-right: 20px;
+}
+
+@media (max-width: 767px) { 
+  .product-thumbnail {
+    width: 50px;
+  }
+}
