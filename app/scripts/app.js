@@ -47,9 +47,11 @@ angular.module('fauxcart', [
 .run(['$rootScope', function($rootScope) {
 
   $rootScope.$on('$routeChangeStart', function(event, next) {
-    _.each(event.targetScope.navLinks, function(link) {
-      link.active = (next.$$route.originalPath === link.path);
-    });
+    if (next.$$route) {
+      _.each(event.targetScope.navLinks, function(link) {
+        link.active = (next.$$route.originalPath === link.path);
+      });
+    }
   });
 
 }]);
