@@ -1,31 +1,23 @@
 var _ = require('lodash');
+var BaseClass = require('./base');
 
 var lastId = 0;
 var pricingRules = [];
 
 /**
- * PricingRule class
+ * PricingRule class (extends BaseClass)
  *
  * This class stores information about how to modify a (product's) price. The
  * following rule types are available:
  *   - straight:   normal "price * quantity" math
  *   - modulo:     provides "5 for the price of 3" type logic
  */
-function PricingRule(name, type, options) {
+function PricingRule() {
   this.id = ++lastId;
-  this.name = name;
-  this.type = type;
-  this.options = options;
+  BaseClass.apply(this, arguments);
 }
+PricingRule.prototype = Object.create(BaseClass.prototype);
 
-/**
- * Updates the current object with the given data.
- */
-PricingRule.prototype.set = function(fields) {
-  this.name = fields.name;
-  this.type = fields.type;
-  this.options = fields.options;
-};
 
 /**
  * Returns the price for a given quantity of items after this rule has been

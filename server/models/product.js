@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var BaseClass = require('./base');
 
 var lastId = 0;
 var products = [];
@@ -9,23 +10,11 @@ var products = [];
  * This class stores informatino about a product in the system. Each product
  * has a name, price-per-product, and a pricing rule to apply.
  */
-function Product(name, price, pricingRule, imageUrl) {
+function Product() {
   this.id = ++lastId;
-  this.name = name;
-  this.price = price;
-  this.pricingRule = pricingRule;
-  this.imageUrl = imageUrl;
+  BaseClass.apply(this, arguments);
 }
-
-/**
- * Updates the current object with the given data.
- */
-Product.prototype.set = function(fields) {
-  this.name = fields.name;
-  this.price = fields.price;
-  this.pricingRule = fields.pricingRule;
-  this.imageUrl = fields.imageUrl;
-};
+Product.prototype = Object.create(BaseClass.prototype);
 
 
 

@@ -79,7 +79,7 @@ module.exports = function(app) {
    * will be the new pricing rule, complete with its newly-created ID.
    */
   app.post('/api/pricing', function(req, res) {
-    var rule = new PricingRule(req.body.name, req.body.type, req.body.options);
+    var rule = new PricingRule(req.body);
     PricingRule.add(rule);
     return res.json(rule);
   });
