@@ -1,7 +1,7 @@
 <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-  <div class="alert alert-info">
+  <div class="alert alert-info" ng-show="!welcomeMessageDimissed">
     Welcome to the Exotic Meat Market! Click below to add some tasty meat to your cart.
-    <button type="button" class="close" data-dismiss="alert">
+    <button type="button" class="close" data-dismiss="alert" ng-click="dismissWelcomeMessage()">
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>

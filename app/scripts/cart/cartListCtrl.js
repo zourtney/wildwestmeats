@@ -2,7 +2,7 @@
 
 angular.module('fauxcart.cart')
 
-.controller('CartListCtrl', ['$scope', '$modal', function($scope, $modal) {
+.controller('CartListCtrl', ['$rootScope', '$scope', '$modal', function($rootScope, $scope, $modal) {
 
   /**
    * Shows a confirmation modal, then rlears out the cart (which sits on
@@ -27,6 +27,13 @@ angular.module('fauxcart.cart')
       templateUrl: 'views/cart/checkout.html',
       controller: 'CartModalCtrl'
     });
+  };
+
+  /**
+   * Store preference to not show welcome message on the root scope.
+   */
+  $scope.dismissWelcomeMessage = function() {
+    $rootScope.welcomeMessageDimissed = true;
   };
 
 }]);
