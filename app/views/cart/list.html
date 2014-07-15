@@ -24,6 +24,10 @@
         </span>
         ${{product.price}} per unit
       </div>
+
+      <div ng-show="pricingRules.getById(product.pricingRule).type !== 'straight'" class="text-info">
+        <strong>On sale!</strong>
+      </div>
       
       <div class="controls">
         <button class="btn btn-default" ng-click="cart.add(product.id)">
