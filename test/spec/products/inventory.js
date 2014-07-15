@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Factory: inventory', function() {
+describe('Factory: Product', function() {
 
   beforeEach(module('fauxcart.products'));
 
   var $rootScope,
-      inventory;
+      Product;
 
   //
   // Setup
   //
-  beforeEach(inject(function(_$rootScope_, _inventory_) {
+  beforeEach(inject(function(_$rootScope_, _Product_) {
     $rootScope = _$rootScope_;
-    inventory = _inventory_;
+    Product = _Product_;
   }));
 
 
@@ -23,7 +23,7 @@ describe('Factory: inventory', function() {
   describe('with an instance', function() {
     // `$update`
     it('should have an $update() function on the prototype', function() {
-      expect(typeof inventory.prototype.$update).toBe('function');
+      expect(typeof Product.prototype.$update).toBe('function');
     });
   });
 

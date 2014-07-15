@@ -5,14 +5,14 @@ describe('Factory: pricing', function() {
   beforeEach(module('fauxcart.pricing'));
 
   var $rootScope,
-      pricing;
+      PricingRule;
 
   //
   // Setup
   //
-  beforeEach(inject(function(_$rootScope_, _pricing_) {
+  beforeEach(inject(function(_$rootScope_, _PricingRule_) {
     $rootScope = _$rootScope_;
-    pricing = _pricing_;
+    PricingRule = _PricingRule_;
   }));
 
 
@@ -23,7 +23,7 @@ describe('Factory: pricing', function() {
   describe('with an instance', function() {
     // `$update`
     it('should have an $update() function on the prototype', function() {
-      expect(typeof pricing.prototype.$update).toBe('function');
+      expect(typeof PricingRule.prototype.$update).toBe('function');
     });
   });
 
