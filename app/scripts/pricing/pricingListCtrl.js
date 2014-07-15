@@ -3,7 +3,7 @@
 
 angular.module('fauxcart.pricing')
 
-.controller('PricingListCtrl', ['$rootScope', '$scope', 'pricing', '$modal', function($rootScope, $scope, pricing, $modal) {
+.controller('PricingListCtrl', ['$rootScope', '$scope', '$modal', 'PricingRule', function($rootScope, $scope, $modal, PricingRule) {
 
   //
   // Helper functions
@@ -69,7 +69,6 @@ angular.module('fauxcart.pricing')
    * the global list. (See `saveRule()` above)
    */
   $scope.addRule = function() {
-    var PricingRule = pricing;  // to appease js-hint's "looks like a constructor" message...TODO: fix service name.
     $scope.editRule(new PricingRule());
   };
 

@@ -23,12 +23,12 @@ angular.module('fauxcart', [
  * which all page-level controllers (expect modals) have access to. This allows
  * us to cache data, like the product list, between pages.
  */
-.controller('appCtrl', ['$scope', 'inventory', 'pricing', 'cart', function($scope, inventory, pricing, cart) {
+.controller('appCtrl', ['$scope', 'Product', 'PricingRule', 'cart', function($scope, Product, PricingRule, cart) {
 
   // These are being put at the "global scope" to satisfy the requirement that
   // the application should be able to update dynamically without a full refresh.
-  $scope.products = inventory.query();
-  $scope.pricingRules = pricing.query();
+  $scope.products = Product.query();
+  $scope.pricingRules = PricingRule.query();
   $scope.cart = cart.get();
 
   // Listen for the app-wide 'priceStale' events which is thrown when:

@@ -5,7 +5,7 @@ angular.module('fauxcart.cart')
 /**
  * Manager service for manipulating the cart pseudo-singleton.
  */
-.factory('cart', ['$q', '$http', '$resource', function($q, $http, $resource) {
+.factory('cart', ['$resource', function($resource) {
 
   var cart = $resource('/api/cart/', null, {
     'update': { method: 'PUT' }
