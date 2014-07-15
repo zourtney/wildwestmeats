@@ -1,6 +1,17 @@
-.cart-price {
-  margin-bottom: 20px;
+// Checkout area at the bottom of the page.
+.cart-checkout {
+  text-align: center;
 
+  .btn-primary {
+    margin: 15px auto;
+  }
+  .btn-link {
+    padding: 6px 4px;
+  }
+}
+
+// The big cart and dollar sign in the checkout section.
+.cart-price {
   .cart-icon {
     font-size: 48px;
   }
@@ -10,6 +21,8 @@
   }
 }
 
+
+// The list of items to add to your cart, with the current quantities.
 .cart-list {
   @extend .list-unstyled;
 }

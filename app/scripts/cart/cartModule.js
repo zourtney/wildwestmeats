@@ -18,21 +18,4 @@ angular.module('fauxcart.cart', [
       controller: 'CartListCtrl'
     });
 
-}])
-
-/**
- * Let this module register its own nav links.
- */
-.run(['$rootScope', function($rootScope) {
-
-  if (! $rootScope.navLinks) {
-    $rootScope.navLinks = [];
-  }
-
-  $rootScope.navLinks.push({
-    title: 'Cart',
-    path: '/cart',
-    position: 0
-  });
-
 }]);

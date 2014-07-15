@@ -34,10 +34,19 @@
           </div>
           
           <div class="collapse navbar-collapse" id="fauxcart-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav">
               <li ng-repeat="link in navLinks | orderBy : 'position'" ng-class="{'active' : link.active}">
                 <a ng-href="#{{link.path}}" ng-click="link.click()">
                   <span ng-hide="!link.title">{{link.title}}</span>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="#/cart">
+                  <i class="fa fa-shopping-cart"></i>
+                  ${{cart.total}}
                 </a>
               </li>
             </ul>

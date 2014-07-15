@@ -1,9 +1,13 @@
-<!--<h1>Exotic Meat Market Checkout</h1>-->
-<div class="cart-price">
-  <i class="fa fa-shopping-cart cart-icon"></i>
-  <span class="price">${{cart.total}}</span>
-  <button class="btn btn-link" ng-click="emptyCart()">empty</button>
+<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+  <div class="alert alert-info">
+    Welcome to the Exotic Meat Market! Click below to add some tasty meat to your cart.
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+  </div>
 </div>
+<div class="clearfix"></div>
 
 <ul class="cart-list">
   <li ng-repeat="product in products" class="cart-list-item col-sm-6 col-md-4">
@@ -29,3 +33,19 @@
     </div>
   </li>
 </ul>
+<div class="clearfix"></div>
+
+<hr />
+
+<div class="cart-checkout">
+  <div class="cart-price">
+    <i class="fa fa-shopping-cart cart-icon"></i>
+    <span class="price">${{cart.total}}</span>
+  </div>
+
+  <button class="btn btn-lg btn-primary" ng-disabled="cart.price === 0">Check out</button>
+
+  <div class="center-block cart-empty">
+    Changed your mind? You can <button class="btn btn-link" ng-click="emptyCart()">empty</button> your cart.
+  </div>
+</div>
