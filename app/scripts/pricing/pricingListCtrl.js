@@ -44,6 +44,9 @@ angular.module('fauxcart.pricing')
   // Scope functions
   //
 
+  /**
+   * Shows a modal in which you can update the pricing rule.
+   */
   $scope.editRule = function(rule) {
     var modalInstance = $modal.open({
       templateUrl: 'views/pricing/edit.html',
@@ -60,11 +63,19 @@ angular.module('fauxcart.pricing')
     });
   };
 
+  /**
+   * Shows the edit modal with a new, unsaved pricing rule. If the user clicks
+   * 'save' in the modal, the rule will be POSTed to the server and added to
+   * the global list. (See `saveRule()` above)
+   */
   $scope.addRule = function() {
     var PricingRule = pricing;  // to appease js-hint's "looks like a constructor" message...TODO: fix service name.
     $scope.editRule(new PricingRule());
   };
 
+  /**
+   * Shows a modal asking the user to confirm pricing rule deletion.
+   */
   $scope.deleteRule = function(rule) {
     var modalInstance = $modal.open({
       templateUrl: 'views/pricing/deleteConfirmation.html',
