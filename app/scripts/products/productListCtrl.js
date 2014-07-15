@@ -47,12 +47,4 @@ angular.module('fauxcart.products')
     });
   };
 
-  /**
-   * Returns the pricing rule associated with this product.
-   */
-  $scope.getPricingRule = function(product) {
-    //TODO: consider putting this into a service of sorts.
-    return _.findWhere($scope.pricingRules, { id: parseInt(product.pricingRule) });
-  };
-
 }]);

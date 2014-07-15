@@ -17,7 +17,7 @@ angular.module('fauxcart.pricing')
     
     rule[method]().then(function() {
       // Add rule to global set if needed (only on POST)
-      if (! _.contains($scope.pricingRules, rule)) {
+      if (! $scope.pricingRules.contains(rule)) {
         $scope.pricingRules.push(rule);
       }
 
@@ -31,10 +31,7 @@ angular.module('fauxcart.pricing')
    */
   function deleteRule(rule) {
     rule.$delete().then(function() {
-      var i = _.indexOf($scope.pricingRules, rule);
-      if (i >= 0) {
-        $scope.pricingRules.splice(i, 1);
-      }
+      $scope.pricingRules.remove(rule);
     });
   }
 

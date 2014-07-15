@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h3 class="modal-title">
-    <span ng-show="isNew()">New rule</span>
-    <span ng-hide="isNew()">Edit {{rule.name}}</span>
+    <span ng-show="rule.isNew()">New rule</span>
+    <span ng-hide="rule.isNew()">Edit {{rule.name}}</span>
   </h3>
 </div>
 <div class="modal-body">
@@ -48,7 +48,7 @@
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
   <button class="btn btn-primary" ng-click="$close()">
-    <span ng-show="isNew()">Create</span>
-    <span ng-hide="isNew()">Save</span>
+    <span ng-show="rule.isNew()">Create</span>
+    <span ng-hide="rule.isNew()">Save</span>
   </button>
 </div>
