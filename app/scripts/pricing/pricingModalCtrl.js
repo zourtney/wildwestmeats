@@ -9,4 +9,8 @@ angular.module('fauxcart.pricing')
 
   $scope.rule = rule;
 
+  $scope.isNew = function() {
+    return ! $scope.rule.hasOwnProperty('id');
+  }
+
 }]);
