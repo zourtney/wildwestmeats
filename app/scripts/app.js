@@ -1,3 +1,4 @@
+/*global _ */
 'use strict';
 
 angular.module('fauxcart', [
@@ -35,6 +36,20 @@ angular.module('fauxcart', [
   //   - a product changes (its 'pricingRule' or 'price' may have changed)
   $scope.$on('priceStale', function() {
     $scope.cart.$get();
+  });
+
+}])
+
+/**
+ * Candy: watch for route changes and mark the module-registered nav link items
+ * as active or not.
+ */
+.run(['$rootScope', function($rootScope) {
+
+  $rootScope.$on('$routeChangeStart', function(event, next) {
+    _.each(event.targetScope.navLinks, function(link) {
+      link.active = (next.$$route.originalPath === link.path);
+    });
   });
 
 }]);

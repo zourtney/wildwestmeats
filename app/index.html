@@ -21,20 +21,31 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#pricing">Pricing</a></li>
-          <li><a ng-href="#products">Products</a></li>
-        </ul>
-        <h3 class="text-muted">fauxcart</h3>
+      <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#fauxcart-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ng-href="/">Exotic Meat Market</a>
+          </div>
+          
+          <div class="collapse navbar-collapse" id="fauxcart-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li ng-repeat="link in navLinks | orderBy : 'position'" ng-class="{'active' : link.active}">
+                <a ng-href="#{{link.path}}" ng-click="link.click()">
+                  <span ng-hide="!link.title">{{link.title}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
-      <div ng-view=""></div>
-
-      <div class="footer">
-      </div>
+      <div class="container" ng-view=""></div>
     </div>
 
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -83,7 +94,7 @@
         <script src="scripts/pricing/pricingSvc.js"></script>
 
         <script src="scripts/products/productsModule.js"></script>
-        <script src="scripts/products/productEditCtrl.js"></script>
+        <script src="scripts/products/productModalCtrl.js"></script>
         <script src="scripts/products/productListCtrl.js"></script>
         <script src="scripts/products/productSvc.js"></script>
 
