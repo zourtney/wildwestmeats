@@ -39,6 +39,9 @@
     "npm": "^1.4.20",
     "time-grunt": "^0.3.1"
   },
+  "engines": {
+    "node": "6.11.1"
+  },
   "scripts": {
     "test": "grunt test",
     "postinstall": "bower install"
