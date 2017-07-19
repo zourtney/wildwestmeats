@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "bower install"
+    "postinstall": "./node_modules/.bin/bower cache clean && ./node_modules/.bin/bower install"
   },
   "devDependencies": {
     "body-parser": "^1.17.2",
